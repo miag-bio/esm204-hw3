@@ -13,8 +13,7 @@ mitigate climate change.
 
 While the Interagency Working Group develops a new SCC, the Biden Administration’s “interim”
 value is $51 per metric ton of CO2. The electricity sector is the second largest source of greenhouse
-gas emissions in the U.S. (after transportation). In this homework, you will consider the distribu-
-tional consequences of imposing a household electricity tax based on the SCC to address the climate
+gas emissions in the U.S. (after transportation). In this homework, you will consider the distributional consequences of imposing a household electricity tax based on the SCC to address the climate
 change problem.
 
 We recommend using R and writing functions to compute your answers wherever possible.
