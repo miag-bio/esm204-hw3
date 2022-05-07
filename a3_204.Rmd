@@ -1,6 +1,6 @@
 ---
 title: "Distributional Consequences of Climate Policy"
-author: "Deanna Elliott"
+author: "Deanna Elliott, Lauren Harris, Mia Guarnieri"
 date: "5/7/2022"
 output: html_document
 ---
@@ -40,16 +40,28 @@ library(janitor)
 reflects the total social cost of one metric ton of CO2, what is the marginal externality cost
 per kwH of electricity?
 
-2.What is the aggregate monthly demand curve for electricity? What is the supply curve for
-electricity? What is the “benefit” to consumers under the status quo? What is the “benefit”
-to producers under the status quo? What is the environmental cost under the status quo?
+```{r}
+
+(0.85/2404.62)*51
+
+#(lbs carbon/1 metric ton)*SCC
+
+```
+- Marginal cost per kwH of electricity is $0.018
+
+2.What is the aggregate monthly demand curve for electricity? What is the supply curve for electricity? What is the “benefit” to consumers under the status quo? What is the “benefit” to producers under the status quo? What is the environmental cost under the status quo?
+
+```{r}
+
+```
 
 3. How is the current consumer benefit divided between “high” and “low” income consumers?
 
-4. Derive the optimal electricity tax (in cents per kWh) using the interim SCC. Noting that recent
-research has shown the poor face a disproportionate share of the impacts from climate change,
-assume that the climate externality is borne entirely by the “low” income group. What would
-be the effects of this tax on:
+```{r}
+
+```
+
+4. Derive the optimal electricity tax (in cents per kWh) using the interim SCC. Noting that recent research has shown the poor face a disproportionate share of the impacts from climate change, assume that the climate externality is borne entirely by the “low” income group. What would be the effects of this tax on:
 (a) The amount of electricity produced and consumed
 (b) The price of electricity
 (c) Overall welfare of “high” income consumers
@@ -88,7 +100,7 @@ model_demand_h <- lm(price_cents ~ q_high_kwh, data=df)
 
 # Qgg = Qlow(P) + Qlow(h) 
 
-# Importantly, since they-intercepts are different, we know that Qagg(P) will have a kink. I include an ifelse() statement to take
+# Importantly, since the y-intercepts are different, we know that Qagg(P) will have a kink. I include an ifelse() statement to take
 # care of the kink.
 
 # define a function to get demand
