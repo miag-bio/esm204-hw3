@@ -46,11 +46,49 @@ per kwH of electricity?
 #(lbs carbon/1 metric ton)*SCC
 
 ```
-- Marginal cost per kwH of electricity is $0.018
+
+The marginal cost per kwH of electricity is $0.018
 
 2.What is the aggregate monthly demand curve for electricity? What is the supply curve for electricity? What is the “benefit” to consumers under the status quo? What is the “benefit” to producers under the status quo? What is the environmental cost under the status quo?
 
 ```{r}
+data <- read_csv(here("data", "HW3_data.csv")) %>% 
+  select(-1) %>% 
+  clean_names()
+
+model_demand_l <- lm(price_cents  ~ q_low_kwh, data=data)
+model_demand_h <- lm(price_cents ~ q_high_kwh, data=data)
+
+#demand function
+demand <- function(p, model){
+  q <- (p - model$coefficients[[1]])/model$coefficients[[2]]
+  q <- ifelse(q<0,0,q)
+  return(q)
+}
+
+#aggregate demand
+demand_agg <- function(p){
+  q <- demand(p, model_demand_l) + demand(p, model_demand_h)
+  return(q)
+}
+
+#price vector
+price = seq(0, 30, length.out = 100)
+
+#applying the aggregate demand function to the price vector
+Qagg <- map(price, demand_agg) %>% unlist()
+
+#making the new dataframe with Qagg and price
+agg_data<- tibble(Qagg = Qagg, price = price)
+
+#making predicted dataframes with low and high models
+l_pred <- tibble(price = price,
+                 demand = model_demand_l$coefficient[1]*price)
+
+#plot
+ggplot() +
+  geom_line(agg_data, mapping = aes(x = Qagg, y = price), lty = "dotdash") +
+  geom_line(l_pred, mapping = aes(x = demand, y = price), lty = "dotted")
 
 ```
 
