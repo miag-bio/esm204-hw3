@@ -35,9 +35,7 @@ library(here)
 library(janitor)
 ```
 
-1. One kWh of electricity emits 0.85 pounds of CO2. Assuming that the interim SCC correctly
-reflects the total social cost of one metric ton of CO2, what is the marginal externality cost
-per kwH of electricity?
+1. One kWh of electricity emits 0.85 pounds of CO2. Assuming that the interim SCC correctly reflects the total social cost of one metric ton of CO2, what is the marginal externality cost per kwH of electricity?
 
 ```{r}
 
@@ -47,7 +45,7 @@ per kwH of electricity?
 
 ```
 
-The marginal cost per kwH of electricity is $0.018
+Assuming the interim SCC correctly reflects the total soial cost of one metric ton of CO2, the marginal cost per kwH of electricity is $0.018
 
 2.What is the aggregate monthly demand curve for electricity? What is the supply curve for electricity? What is the “benefit” to consumers under the status quo? What is the “benefit” to producers under the status quo? What is the environmental cost under the status quo?
 
@@ -92,12 +90,14 @@ h_pred <- tibble(price = price,
 
 #plot
 ggplot() +
-  geom_line(agg_data, mapping = aes(x = Qagg, y = price, color = "a"), lty = "solid") +
-  geom_line(l_pred, mapping = aes(x = demand, y = price, color = "b"), lty = "dashed") +
-  geom_line(h_pred, mapping = aes(x = demand, y = price, color = "c"), lty = "dashed") +
-  scale_color_manual(values = c("darkorchid", "blue", "firebrick"), labels = expression("D (agg)", "D (low)", "D (high)")) +
+  geom_line(agg_data, mapping = aes(x = Qagg, y = price, color = "a"), lty = "solid", size = 1.1) +
+  geom_line(l_pred, mapping = aes(x = demand, y = price, color = "b"), lty = "dashed", size = 1.1) +
+  geom_line(h_pred, mapping = aes(x = demand, y = price, color = "c"), lty = "dashed", size = 1.1) +
+  scale_color_manual(values = c("darkorchid", "blue", "firebrick"), labels = expression("Aggregate", "Low", "High")) +
   labs(x = "Quantity (kWh)",
-       y = "Price (dollars)")
+       y = "Price (USD)",
+       color = "Demand Curve") + 
+  theme_minimal()
 
 ```
 
@@ -116,23 +116,15 @@ ggplot() +
 (f) Total environmental damage
 (g) Total tax revenue generated
 
-5.Now, assume that all revenue from the electricity tax will be redistributed to the consumers in
-proportion to their pre-tax consumption. For example, if 80% of the electricity was consumed
-by “high” income consumers, then they get 80% of the tax revenue. Additionally, consider the
-fact that current scientific evidence suggests the true SCC may be much higher than $51. For
-a range of SCC values ($51, $75, $100, $125, and $150 per metric ton of CO2), calculate the
-effects of an SCC-based electricity tax on:
+5.Now, assume that all revenue from the electricity tax will be redistributed to the consumers in proportion to their pre-tax consumption. For example, if 80% of the electricity was consumed by “high” income consumers, then they get 80% of the tax revenue. Additionally, consider the fact that current scientific evidence suggests the true SCC may be much higher than $51. For a range of SCC values ($51, $75, $100, $125, and $150 per metric ton of CO2), calculate the effects of an SCC-based electricity tax on:
 (a) Overall welfare of “high” income consumers
 (b) Overall welfare of “low” income consumers
 (c) Electricity producers
 
-6. Suppose the “high” income group has access to expensive home solar generation. This lowers
-the electricity demand curve for the “high” income group by half (vertically). Under this new
-demand:
+6. Suppose the “high” income group has access to expensive home solar generation. This lowers the electricity demand curve for the “high” income group by half (vertically). Under this new demand:
 (a) What is total electricity consumption?
 (b) What is the total environmental externality?
-(c) What value of the electricity tax makes the total environmental damage the same as the
-damage when solar panels are available to the high income group?
+(c) What value of the electricity tax makes the total environmental damage the same as the damage when solar panels are available to the high income group?
 
 ```{r}
 df <- read_csv(here("data", "HW3_data.csv")) %>% 
